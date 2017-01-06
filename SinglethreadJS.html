@@ -1,0 +1,29 @@
+<textarea id="log" rows="20" cols="40"></textarea>
+<input id="inp">
+<script type="text/javascript">
+    var l= document.getElementById('log');
+    var i= document.getElementById('inp');
+	alert(0);
+    i.onblur= function() { ///??????????????????????????????????????????????????
+        l.value+= 'blur\n';
+		//alert(1);
+		///http://jsfiddle.net/jfriend00/3sBTb/ ******IMP****** setTmeOut is called at the end, why?
+		
+		// **** diff between async JS and single-threaded JS
+		// http://javascript.info/tutorial/events-and-timing-depth
+    };
+    setTimeout(function() {
+	alert(2);
+        l.value+= 'log in\n';
+		lert(3);
+        l.focus();
+		alert(4);
+        l.value+= 'log out\n';
+		alert(5);
+    }, 5000);
+	alert(6);
+    i.focus();
+	alert(7);
+	
+	//http://stackoverflow.com/questions/2734025/is-javascript-guaranteed-to-be-single-threaded
+</script>

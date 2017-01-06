@@ -1,0 +1,22 @@
+<textarea id="log" rows="20" cols="40"></textarea>
+<input id="inp">
+<script type="text/javascript">
+    
+	var x=1;
+	setTimeout(function() {
+			
+				document.getElementById("log").value = x;
+			
+		}, 5000);
+	
+	function abc(){
+		
+		for(var i=0;i<50000;i++){
+		document.getElementById("log").value = "hi";
+		}
+		
+	}
+	
+	//http://stackoverflow.com/questions/2734025/is-javascript-guaranteed-to-be-single-threaded
+	// EVENT LOOP IMP**********************
+</script>

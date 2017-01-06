@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.divbar{
+position: absolute;
+background-color:gray;
+height: 3px;
+width: 115px;
+}
+.divcontrol{
+position: relative;
+border-radius: 50%;
+  width: 100px;
+    height: 100px;
+    border: 3px solid blue;
+
+background-color:yellow;
+height: 10px;
+width: 10px;
+}
+</style>
+</head>
+<body>
+<div id="bar" class="divbar">
+<div id="control" class="divcontrol" draggable="true"></div>
+<br>
+<input type="text" id="inputtext">
+</div>
+</body>
+<script>
+var bar = document.getElementById("bar");
+var control = document.getElementById("control");
+/*control.addEventListener("click",setPosition,false);
+function setPosition(e){
+var leftPos = control.offsetLeft;
+control.style.left = (leftPos+10) + "px";*/
+bar.addEventListener('click',onBarClick,false);
+//control.addEventListener('drag',controlDrag,false);
+//bar.addEventListener('drop',dropOnBar,false);
+//control.addEventListener('mousemove',mouseOnControl,false);
+
+function onBarClick(e){
+barx = e.clientX;
+bary = e.clientY;
+controlx = control.offsetLeft;
+controly = control.offsetRight;
+
+if (barx > controlx)
+{
+//	alert("barx :" + barx + " " + "controlx :" + controlx);
+	if (controlx < 100)
+	control.style.left = (controlx + 5) + 'px';
+}
+else if (controlx > barx)
+{
+//	alert("barx :" + barx + " " + "controlx :" + controlx);
+	if (controlx > 0)
+	control.style.left = (controlx + 5 * (-1)) + 'px';
+}
+//alert(control.offsetLeft);
+document.getElementById("inputtext").value = control.offsetLeft;
+}
+
+/*function dropOnBar(e){
+event.preventDefault();
+control.style.left = e.clientX * 1 + 'px';
+}
+
+function controlDrag(e){
+control.style.left = e.clientX * 1 + 'px';
+//control.style.right = e.clientY * (-1) + 'px';
+}*/
+</script>
+</html>
