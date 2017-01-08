@@ -2,7 +2,6 @@ var mouseDownX,mouseMoveX,MoveUpX;
 var bar = document.getElementById("bar");
 var control = document.getElementById("control");
 bar.addEventListener('click',onBarClick,false);
-
 //touch events - yet to come
 function onBarTouch(e){
 var rect = control.getBoundingClientRect();
