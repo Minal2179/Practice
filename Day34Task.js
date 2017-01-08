@@ -21,7 +21,7 @@ else if (parseInt(barx) < parseInt(controlx))
 } 
 document.getElementById("inputtext").value = control.style.left;
 }
-// This is the change
+
 //When user clicks on the bar, the controls moves left or right
 function onBarClick(e){
 barx = e.clientX;
