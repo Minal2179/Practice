@@ -1,16 +1,74 @@
 var mouseDownX,mouseMoveX,MoveUpX;
+var downMouse = false;
+var touchControl = false;
+var keyValue;
 var bar = document.getElementById("bar");
 var control = document.getElementById("control");
-/*control.addEventListener("click",setPosition,false);
-function setPosition(e){
-var leftPos = control.offsetLeft;
-control.style.left = (leftPos+10) + "px";*/
+var inputtext = document.getElementById("inputtext");
+var body = document.getElementsByTagName("body")[0];
 bar.addEventListener('click',onBarClick,false);
-//bar.addEventListener('touchstart',onBarTouch,false);
-// control.addEventListener('mousedown',mouseOnDown,false);
-// control.addEventListener('mouseup',mouseOnUp,false);
-// control.addEventListener('mousemove',mouseOnMove,false);
+bar.addEventListener('touchstart',onBarTouch,false);
+body.addEventListener('mousedown',mouseOnDown,false);
+body.addEventListener('mouseup',mouseOnUp,false);
+body.addEventListener('mousemove',mouseOnMove,false);
+body.addEventListener('touchstart',onControlTouchStart,false);
+body.addEventListener('touchmove',onControlTouchMove,false);
+body.addEventListener('touchend',onControlTouchEnd,false);
+inputtext.addEventListener('keydown',textChangeDown,false);
+inputtext.addEventListener('keyup',textChangeUp,false);
+//control.addEventListener('DOMCharacterDataModified',textChange,false);
+
+function textChangeDown(e){
+	// if (e.target.id = 'inputtext')
+	// {
+		// console.log("document.getElementById : "+document.getElementById("inputtext").value);
+		// control.style.left = document.getElementById("inputtext").value + 'px';
+	// }
+	var enteredkey = document.getElementById("inputtext").value;
+	console.log(enteredkey);
+	keyValue = enteredkey;
+}
+function textChangeUp(e){
+	
+	console.log(keyValue);
+}
+
+function onControlTouchStart(e){
+	touchControl = true;
+}
+
+function onControlTouchMove(ev){
+	var touch = ev.touches[0];
+		var controlx;
+	if (touchControl)
+	{
+	controlx = parseInt(window.getComputedStyle(control,null).getPropertyValue("left"));	
+	console.log("controlx in onControlTouchMove : "+controlx);
+	console.log(touch.pageX);
+    //ev.target.appendChild(document.getElementById(data));
+	if ((touch.pageX) > controlx)
+	{
+	if (controlx < 100)
+	control.style.left = (controlx + 1) + 'px';
+	}
+	else if ((touch.pageX) < controlx)
+	{
+	if (controlx > 0)
+	control.style.left = (controlx - 1) + 'px';
+	}
+
+	}
+	document.getElementById("inputtext").innerHTML = parseInt(control.style.left);
+
+}
+
+function onControlTouchEnd(e){
+touchControl = false;
+}
+
 function onBarTouch(e){
+e.preventDefault();
+var barx = bar.clientX;
 var rect = control.getBoundingClientRect();
 var controlx = parseInt(window.getComputedStyle(control,null).getPropertyValue("left"));
 if (parseInt(barx) > parseInt(controlx))
@@ -19,13 +77,14 @@ if (parseInt(barx) > parseInt(controlx))
 	if (controlx < 100)
 	control.style.left = (controlx + 1) + 'px';
 }
+
 else if (parseInt(barx) < parseInt(controlx))
 {
 	console.log("in else barx :" + barx + " " + "controlx :" + controlx);
 	if (controlx > 0)
 	control.style.left = (controlx - 1) + 'px';
 } 
-document.getElementById("inputtext").value = control.style.left;
+document.getElementById("inputtext").value	 = parseInt(control.style.left);
 }
 function onBarClick(e){
 barx = e.clientX;
@@ -35,8 +94,6 @@ barx = e.clientX;
 var rect = control.getBoundingClientRect();
 //var controlx = rect.left;
 var controlx = parseInt(window.getComputedStyle(control,null).getPropertyValue("left"));
-//alert(controlx);
-
 
 if (parseInt(barx) > parseInt(controlx))
 {
@@ -50,56 +107,48 @@ else if (parseInt(barx) < parseInt(controlx))
 	if (controlx > 0)
 	control.style.left = (controlx - 1) + 'px';
 } 
-document.getElementById("inputtext").value = control.style.left;
+document.getElementById("inputtext").value = parseInt(control.style.left);
 }
 
-function allowDrop(ev) {
-    ev.preventDefault();
+function mouseOnDown(e){
+	//e.preventDefault();
+	console.log(e.target.id);
+	if (e.target.id === "control")
+	downMouse = true;
+	//mouseDownX = e.clientX;
+	//console.log("mouseDownX : "+mouseDownX);
 }
 
-function drag(ev) {
-	//var controlx = parseInt(window.getComputedStyle(control,null).getPropertyValue("left"));
-	//console.log("controlx in drag : "+controlx);
-    //ev.dataTransfer.setData("controlx", controlx);
+function mouseOnMove(ev){
+	ev.preventDefault();
+	var controlx;
+	//if (ev.target.id === "control")
+	//{
+		if (downMouse)
+		{
+			controlx = parseInt(window.getComputedStyle(control,null).getPropertyValue("left"));	
+			console.log("controlx in mouseOnMove : "+controlx);
+			console.log(ev.pageX);
+			//ev.target.appendChild(document.getElementById(data));
+			if ((ev.pageX) > controlx)
+			{
+				if (controlx < 100)
+				control.style.left = (controlx + 1) + 'px';
+			}
+			else if ((ev.pageX) < (controlx+5))
+			{
+				if (controlx > 0)
+				control.style.left = (controlx - 1) + 'px';
+			}
+
+			
+			document.getElementById("inputtext").value = parseInt(control.style.left);
+		}
+	//}
 }
 
-function drop(ev) {
-	var prevX = -1;
-    ev.preventDefault();
-    //var controlx = ev.dataTransfer.getData("controlx");
-	var controlx = parseInt(window.getComputedStyle(control,null).getPropertyValue("left"));	
-	console.log("controlx in drop : "+controlx);
-	console.log(ev.pageX);
-    //ev.target.appendChild(document.getElementById(data));
-	if ((ev.pageX) > controlx)
-	{
-	control.style.left = (controlx + 1) + 'px';
-	}
-	else if ((ev.pageX) < controlx)
-	{
-	control.style.left = (controlx - 1) + 'px';
-	}
+function mouseOnUp(e){
+	
+	e.preventDefault();
+	downMouse = false;
 }
-
-// function mouseOnDown(e){
-	// mouseDownX = e.clientX;
-	// console.log("mouseDownX : "+mouseDownX);
-// }
-
-// function mouseOnMove(e){
-	// mouseMoveX = e.clientX;
-	// if (mouseDownX < mouseMoveX)
-	// {
-		// console.log("mouseDownX < mouseMoveX");
-		// console.log("mouseMoveX : "+mouseMoveX);
-	// }
-	// else
-	// {
-		// console.log("mouseDownX > mouseMoveX");
-		// console.log("mouseMoveX : " +mouseMoveX);
-	// }
-// }
-
-// function mouseOnUp(e){
-	// control.style.left = (mouseMoveX + 1) + 'px';
-// }
