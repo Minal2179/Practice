@@ -14,23 +14,26 @@ body.addEventListener('mousemove',mouseOnMove,false);
 body.addEventListener('touchstart',onControlTouchStart,false);
 body.addEventListener('touchmove',onControlTouchMove,false);
 body.addEventListener('touchend',onControlTouchEnd,false);
-inputtext.addEventListener('keydown',textChangeDown,false);
-inputtext.addEventListener('keyup',textChangeUp,false);
+inputtext.addEventListener('keypress',textChangeDown,false);
+//inputtext.addEventListener('keyup',textChangeUp,false);
 //control.addEventListener('DOMCharacterDataModified',textChange,false);
 
 function textChangeDown(e){
 	// if (e.target.id = 'inputtext')
 	// {
 		// console.log("document.getElementById : "+document.getElementById("inputtext").value);
-		// control.style.left = document.getElementById("inputtext").value + 'px';
+		 control.style.left = document.getElementById("inputtext").value + 'px';
 	// }
-	var enteredkey = document.getElementById("inputtext").value;
-	console.log(enteredkey);
-	keyValue = enteredkey;
+	//
+ //var enteredkey = document.getElementById("inputtext").value;
+	// console.log(enteredkey);
+	// keyValue = enteredkey;
 }
 function textChangeUp(e){
 	
 	console.log(keyValue);
+	control.style.left = document.getElementById("inputtext").value + 'px';
+	
 }
 
 function onControlTouchStart(e){
