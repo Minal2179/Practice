@@ -1,3 +1,8 @@
+//changes
+// negative values, control moves out... restrict 0-100
+// keydown par take key value
+//bind events to document
+
 var mouseDownX,mouseMoveX,MoveUpX;
 var downMouse = false;
 var touchControl = false;
@@ -5,24 +10,25 @@ var keyValue;
 var bar = document.getElementById("bar");
 var control = document.getElementById("control");
 var inputtext = document.getElementById("inputtext");
-var body = document.getElementsByTagName("body")[0];
+var body = document.getElementsByTagName("body")[0]; //wtf is this :P
 bar.addEventListener('click',onBarClick,false);
 bar.addEventListener('touchstart',onBarTouch,false);
 body.addEventListener('mousedown',mouseOnDown,false);
-body.addEventListener('mouseup',mouseOnUp,false);
-body.addEventListener('mousemove',mouseOnMove,false);
-body.addEventListener('touchstart',onControlTouchStart,false);
-body.addEventListener('touchmove',onControlTouchMove,false);
-body.addEventListener('touchend',onControlTouchEnd,false);
-inputtext.addEventListener('keypress',textChangeDown,false);
-//inputtext.addEventListener('keyup',textChangeUp,false);
+document.addEventListener('mouseup',mouseOnUp,false);
+document.addEventListener('mousemove',mouseOnMove,false);
+document.addEventListener('touchstart',onControlTouchStart,false);
+document.addEventListener('touchmove',onControlTouchMove,false);
+document.addEventListener('touchend',onControlTouchEnd,false);
+inputtext.addEventListener('keydown',textChangeDown,false);
+inputtext.addEventListener('keyup',textChangeUp,false);
 //control.addEventListener('DOMCharacterDataModified',textChange,false);
 
 function textChangeDown(e){
 	// if (e.target.id = 'inputtext')
 	// {
 		// console.log("document.getElementById : "+document.getElementById("inputtext").value);
-		 control.style.left = document.getElementById("inputtext").value + 'px';
+		 //control.style.left = e.key + 'px';
+		 keyValue = e.key;
 	// }
 	//
  //var enteredkey = document.getElementById("inputtext").value;
@@ -31,7 +37,9 @@ function textChangeDown(e){
 }
 function textChangeUp(e){
 	
-	console.log(keyValue);
+	console.log("keyValue : "+keyValue);
+	console.log("e.key in keyup : "+e.key);
+	
 	control.style.left = document.getElementById("inputtext").value + 'px';
 	
 }
@@ -115,7 +123,7 @@ document.getElementById("inputtext").value = parseInt(control.style.left);
 
 function mouseOnDown(e){
 	//e.preventDefault();
-	console.log(e.target.id);
+	console.log(e.target.id);                                                     // check if direct e.target obj can be compared
 	if (e.target.id === "control")
 	downMouse = true;
 	//mouseDownX = e.clientX;
