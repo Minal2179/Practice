@@ -13,7 +13,7 @@ var inputtext = document.getElementById("inputtext");
 var body = document.getElementsByTagName("body")[0]; //wtf is this :P
 bar.addEventListener('click',onBarClick,false);
 bar.addEventListener('touchstart',onBarTouch,false);
-body.addEventListener('mousedown',mouseOnDown,false);
+document.addEventListener('mousedown',mouseOnDown,false);
 document.addEventListener('mouseup',mouseOnUp,false);
 document.addEventListener('mousemove',mouseOnMove,false);
 document.addEventListener('touchstart',onControlTouchStart,false);
@@ -60,7 +60,7 @@ function onControlTouchMove(ev){
 	if ((touch.pageX) > controlx)
 	{
 	if (controlx < 100)
-	control.style.left = (controlx + 1) + 'px';
+	control.style.left = (controlx + 1) + 'px';	
 	}
 	else if ((touch.pageX) < controlx)
 	{
