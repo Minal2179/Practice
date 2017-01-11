@@ -28,11 +28,11 @@ function mouseOnMove(e){
 	console.log('e.pageY : '+e.pageY);
 	var setLeft = e.pageX + 'px';
 	var setTop = e.pageY + 'px';
-	if (e.pageX > 600)
+	if (e.pageX > 400)
 		setLeft = "400px";
 	if (e.pageX < 0)
 		setLeft = "0px";
-	if (e.pageY > 600)
+	if (e.pageY > 400)
 		setTop = "400px";
 	if (e.pageY < 0)
 		setTop = "0px";
