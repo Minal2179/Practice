@@ -1,10 +1,11 @@
 var downMouse = false;
+var clickX,clickY,innerDivX,innerDivY;
 var outerDiv = document.getElementById("outerDiv");
 var innerDiv = document.getElementById("innerDiv");
-console.log(innerDiv.offsetLeft);
-console.log(innerDiv.offsetTop);
-console.log(outerDiv.offsetLeft);
-console.log(outerDiv.offsetTop);
+// console.log(innerDiv.offsetLeft);
+// console.log(innerDiv.offsetTop);
+// console.log(outerDiv.offsetLeft);
+// console.log(outerDiv.offsetTop);
 
 document.addEventListener('mousedown',mouseOnDown,false);
 document.addEventListener('mouseup',mouseOnUp,false);
@@ -49,22 +50,31 @@ function onDivTouchEnd(e){
 }
 
 function mouseOnDown(e){
-	console.log(e.target.id);                                                     // check if direct e.target obj can be compared
 	if (e.target.id === "innerDiv")
 	downMouse = true;
+	innerDivX = parseInt(window.getComputedStyle(innerDiv,null).getPropertyValue("left"));
+	innerDivY = parseInt(window.getComputedStyle(innerDiv,null).getPropertyValue("top"));
+	clickX = parseInt(e.clientX);
+	clickY = parseInt(e.clientY);
+	console.log('clickX :' + clickX);
+	console.log('clickY :' + clickY);
+	console.log('innerDivX :' + innerDivX);
+	console.log('innerDivY :' + innerDivY);
+	console.log('clickX - innerDivX : '+(clickX - innerDivX));
+	console.log('clickY - innerDivY : '+(clickY - innerDivY));
 	console.log('downmouse : '+downMouse);
 }
 
 function mouseOnMove(e){
 	
 	e.preventDefault();
-	console.log('mousemove');
-	console.log('innerDiv.style.left : '+innerDiv.style.left);
-	console.log('innerDiv.style.top : '+innerDiv.style.top);
-	console.log('e.pageX : '+e.pageX);
-	console.log('e.pageY : '+e.pageY);
-	var setLeft = e.pageX + 'px';
-	var setTop = e.pageY + 'px';
+	// console.log('mousemove');
+	// console.log('innerDiv.style.left : '+innerDiv.style.left);
+	// console.log('innerDiv.style.top : '+innerDiv.style.top);
+	// console.log('e.pageX : '+e.pageX);
+	// console.log('e.pageY : '+e.pageY);
+	var setLeft = parseInt(e.pageX + (clickX - innerDivX))  + 'px';
+	var setTop = parseInt(e.pageY + (clickY - innerDivY)) + 'px';
 	
 	//Made 400 to control the inner Div
 	if (e.pageX > 400)
@@ -79,8 +89,8 @@ function mouseOnMove(e){
 		{
 			innerDiv.style.left = setLeft;
 			innerDiv.style.top = setTop;
-			console.log('after set left : '+innerDiv.style.left);
-			console.log('after set top : '+innerDiv.style.top);
+			// console.log('after set left : '+innerDiv.style.left);
+			// console.log('after set top : '+innerDiv.style.top);
 		}
 
 }
