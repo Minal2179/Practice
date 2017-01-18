@@ -18,8 +18,19 @@ document.addEventListener('touchend',onDivTouchEnd,false);
 function onDivTouchStart(e)
 {	
 	e.preventDefault();
-	if (doubletap())
+	touchDiv = true;
+	var startdate = new Date();
+	var lastTap = 0;
+	var currentTime = new Date().getTime();
+	var tapLength = currentTime - lastTap;
+	var lasttime = 0;
+	var timeout;
+	var interval = startdate.getTime() - lasttime;
+	clearTimeout(timeout);
+	if (tapLength > 0 && tapLength < 500)
 	{
+		alert('hi');
+		
 		centerX = '300px';
 		centerY = '300px';
 		if (e.target.id === "innerDiv")
@@ -28,10 +39,12 @@ function onDivTouchStart(e)
 			innerDiv.style.top = parseInt(300 - (innerDiv.offsetHeight)/2) + 'px';
 		}
 	}
+	else
+	{
+	timeout = setTimeout(function(){
+	
 	if (e.target.id === "innerDiv")
 	{
-		touchDiv = true;
-
 		var numTouches = e.touches.length;
 		if (numTouches == 1)
 		{
@@ -51,8 +64,12 @@ function onDivTouchStart(e)
 			dist1 = Math.sqrt(((finger2X - finger1X)*(finger2X - finger1X)) + ((finger2Y - finger1Y)*(finger2Y - finger1Y)));
 		}
 	}
+	 clearTimeout(timeout);
+	},500);
 }
-
+ lastTap = currentTime;
+}
+// http://jsfiddle.net/brettwp/J4djY/
 function doubletap() 
 {
    var now = new Date().getTime();
