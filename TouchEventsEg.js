@@ -5,6 +5,9 @@ var finger1X,finger1Y,finger2X,finger2Y,dist1,dist2;
 var outerDiv = document.getElementById("outerDiv");
 var innerDiv = document.getElementById("innerDiv");
 var mylatesttap;
+var doubleTap = false;
+var prev = 0;
+var timeout;
 
 document.addEventListener('mousedown',mouseOnDown,false);
 document.addEventListener('mouseup',mouseOnUp,false);
@@ -16,21 +19,19 @@ document.addEventListener('touchend',onDivTouchEnd,false);
 
 
 function onDivTouchStart(e)
-{	
+{
 	e.preventDefault();
 	touchDiv = true;
-	var startdate = new Date();
-	var lastTap = 0;
-	var currentTime = new Date().getTime();
-	var tapLength = currentTime - lastTap;
-	var lasttime = 0;
-	var timeout;
-	var interval = startdate.getTime() - lasttime;
-	clearTimeout(timeout);
-	if (tapLength > 0 && tapLength < 500)
+	var startTime = new Date().getTime();
+	var interval = startTime - prev;
+	console.log("startTime : "+startTime);
+	console.log("prev : "+prev);
+	console.log("interval : "+interval);
+	if (interval > 0 && interval < 500)
 	{
-		alert('hi');
-		
+		doubleTap = true;
+		console.log("doubleTap : "+doubleTap);
+		clearTimeout(timeout);
 		centerX = '300px';
 		centerY = '300px';
 		if (e.target.id === "innerDiv")
@@ -41,8 +42,13 @@ function onDivTouchStart(e)
 	}
 	else
 	{
+	doubleTap = false;
+	prev = startTime;
+	console.log("prev after setting : "+prev)
+
+	console.log("inside single tap");
 	timeout = setTimeout(function(){
-	
+console.log("inside single tap timeout");
 	if (e.target.id === "innerDiv")
 	{
 		var numTouches = e.touches.length;
@@ -54,9 +60,9 @@ function onDivTouchStart(e)
 			innerDivX = parseInt(window.getComputedStyle(innerDiv,null).getPropertyValue("left"));
 			innerDivY = parseInt(window.getComputedStyle(innerDiv,null).getPropertyValue("top"));
 		}
-	
+
 		if(numTouches == 2)
-		{	
+		{
 			finger1X = e.touches[0].clientX;
 			finger1Y = e.touches[0].clientY;
 			finger2X = e.touches[1].clientX;
@@ -64,33 +70,22 @@ function onDivTouchStart(e)
 			dist1 = Math.sqrt(((finger2X - finger1X)*(finger2X - finger1X)) + ((finger2Y - finger1Y)*(finger2Y - finger1Y)));
 		}
 	}
-	 clearTimeout(timeout);
-	},500);
+ },500);
 }
- lastTap = currentTime;
-}
-// http://jsfiddle.net/brettwp/J4djY/
-function doubletap() 
-{
-   var now = new Date().getTime();
-   var timesince = now - mylatesttap;
-   if((timesince < 600) && (timesince > 0))
-	return true;
-   else
-    return false;
 
-   mylatesttap = new Date().getTime();
 }
 
 function onDivTouchMove(e){
-	
+
 	e.preventDefault();
+console.log("doubleTap inside onDivTouchMove : "+doubleTap);
+	//if (doubleTap == 'false'){
 	var restrict = false;
 	if (e.target.id === "innerDiv"){
 	var numTouches = e.touches.length;
-	
+
 	if(numTouches == 2)
-	{	
+	{
 		finger1X = e.touches[0].clientX;
 		finger1Y = e.touches[0].clientY;
 		finger2X = e.touches[1].clientX;
@@ -123,14 +118,14 @@ function onDivTouchMove(e){
 			}
 		}
 	}
-	
+
 		if(numTouches == 1)
 		{
 			var touch = e.touches[0];
-				
+
 			var setLeft = parseInt(touch.pageX - (touchX - innerDivX))  + 'px';
 			var setTop = parseInt(touch.pageY - (touchY - innerDivY)) + 'px';
-				
+
 			if (touch.pageX > 400)
 				setLeft = (600 - parseInt(innerDiv.offsetWidth)) + 'px';
 			if ((touch.pageX - (touchX - innerDivX)) < 0)
@@ -139,14 +134,25 @@ function onDivTouchMove(e){
 				setTop = (600 - parseInt(innerDiv.offsetHeight)) + 'px';
 			if ((touch.pageY - (touchY - innerDivY)) < 0)
 				setTop = "0px";
-				
+
 			if (touchDiv)
 			{
 				innerDiv.style.left = setLeft;
 				innerDiv.style.top = setTop;
 			}
 		}
-	}	
+	}
+//}
+// else {
+// 	centerX = '300px';
+// 	centerY = '300px';
+// 	if (e.target.id === "innerDiv")
+// 	{
+// 		innerDiv.style.left = parseInt(300 - (innerDiv.offsetWidth)/2) + 'px';
+// 		innerDiv.style.top = parseInt(300 - (innerDiv.offsetHeight)/2) + 'px';
+// 	}
+//
+// }
 }
 
 function onDivTouchEnd(e)
@@ -170,7 +176,7 @@ function mouseOnMove(e)
 	e.preventDefault();
 	var setLeft = parseInt(e.pageX - (clickX - innerDivX))  + 'px';
 	var setTop = parseInt(e.pageY - (clickY - innerDivY)) + 'px';
-	
+
 	if (e.pageX > 400)
         setLeft = "400px";
     if ((e.pageX - (clickX - innerDivX)) < 0)
