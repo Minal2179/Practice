@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <ui>
-	<panel rect="0,0,400,400">
-		<button rect="0,0,20,20">Button1</button>
-		<label rect="25,0,30,10">Welcome</label>
+	<panel rect="0,0,400,400" uniquid="div1">
+		<button rect="0,0,20,20" uniquid="btn1">Button1</button>
+		<label rect="25,0,30,30" uniquid="label1">Welcome</label>
 	</panel>
-	<button rect="0,25,20,20">Button2</button>
-	<image src="imagePath" rect="0,50,20,20"></image>
-	<panel rect="200,200,200,200">
-		<button rect="100,100,20,20">Button3</button>
+	<button rect="0,25,20,20" uniquid="btn2">Button2</button>
+	<image imgSrc="E:/Practice/touch.png" rect="200,200,200,200" uniquid="img1">image1</image>
+	<panel rect="200,200,200,200" uniquid="div2">
+		<button rect="100,100,20,20" uniquid="btn3">Button3</button>
 	</panel>
 </ui>
