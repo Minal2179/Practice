@@ -2,11 +2,10 @@
 <ui>
 	<panel rect="0,0,400,400">
 		<button rect="0,0,20,20">Button1</button>
-		<label rect="25,0,30,10">Welcome</button>
+		<label rect="25,0,30,10">Welcome</label>
 	</panel>
 	<button rect="0,25,20,20">Button2</button>
-	<image src="imagePath" rect="0,50,20,20"></mage>
-	<textbox rect"50,50,20,20"></textbox>
+	<image src="imagePath" rect="0,50,20,20"></image>
 	<panel rect="200,200,200,200">
 		<button rect="100,100,20,20">Button3</button>
 	</panel>
