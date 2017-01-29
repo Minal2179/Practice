@@ -3,12 +3,10 @@ $(document).ready(function()
 	$.get('Day56.xml', function(result){
 		
 		var mainElements = result.documentElement.children;
-		//console.log("mainElements.length : "+mainElements.length);
 		for (i=0;i<mainElements.length;i++){
 
 			if (mainElements[i].tagName === 'panel')
 			{
-				//console.log("have to draw panel");
 				drawDiv(mainElements[i],"");
 			}
 			else
@@ -19,22 +17,23 @@ $(document).ready(function()
 		
 	});
 });
+//j=-1;
 	function drawDiv(elementObject,parentElement){
 		createElement(elementObject,parentElement);
+		//j++;
+		var j = 0;
 		var divElements = elementObject.children;
-		//console.log("elementObject.tagname : "+elementObject.tagName);
-		//console.log("elementObject.children.length : "+elementObject.children.length);
-		for(j=0;j<elementObject.children.length;j++){
-			//console.log("elementObject.tagName : "+elementObject.children[j].tagName);
-			if(elementObject.children[j].tagName == "panel")
+		console.log("started");
+		for(j;j<divElements.length;j++)
+		{
+			console.log("divElements[j].tagName : "+divElements[j].tagName);
+			console.log("j value : "+j);
+			if(divElements[j].tagName == "panel")
 			{
-				//console.log("no child panel");
 				drawDiv(elementObject.children[j],divElements[j].parentElement.attributes["uniquid"].value);
 			}
 			else
 			{
-				console.log("panel's children divElements[i].tagName : "+divElements[j].tagName);
-				console.log("elementObject.parentElement.attributes[uniquid].value : "+divElements[j].parentElement.attributes["uniquid"].value );
 				createElement(divElements[j],divElements[j].parentElement.attributes["uniquid"].value);
 			}
 		}
@@ -66,7 +65,7 @@ $(document).ready(function()
 			}
 			else 
 				uiElement.setAttribute("src",imgSrc);
-			$(uiElement).css({left: coordinates[0]+'px',top: coordinates[1]+'px',width: coordinates[2]+'px',height: coordinates[3],position:"relative"});
+			$(uiElement).css({left: coordinates[0]+'px','top': coordinates[1]+'px',width: coordinates[2]+'px',height: coordinates[3],position:"relative"});
 			if(elementObject.tagName == "panel"){
 			}
 			else
