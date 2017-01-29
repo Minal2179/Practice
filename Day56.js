@@ -66,7 +66,7 @@ $(document).ready(function()
 			}
 			else 
 				uiElement.setAttribute("src",imgSrc);
-			$(uiElement).css({left: coordinates[0]+'px',top: coordinates[1]+'px',width: coordinates[2]+'px',height: coordinates[3]});
+			$(uiElement).css({left: coordinates[0]+'px',top: coordinates[1]+'px',width: coordinates[2]+'px',height: coordinates[3],position:"relative"});
 			if(elementObject.tagName == "panel"){
 			}
 			else
