@@ -3,63 +3,53 @@ $(document).ready(function()
 	$.get('Day56.xml', function(result){
 		
 		var mainElements = result.documentElement.children;
+		//console.log("mainElements.length : "+mainElements.length);
 		for (i=0;i<mainElements.length;i++){
+
 			if (mainElements[i].tagName === 'panel')
 			{
-				//drawDiv(mainElements[i]);
+				//console.log("have to draw panel");
+				drawDiv(mainElements[i]);
 			}
 			else
 			{
-				createElement(mainElements[i]);
+				createElement(mainElements[i],"");
 			}
 		}
 		
-		
-		
-		
-			$(result).find('ui').each(function(){
-				$(this).children().each(function(){
-					switch(this.tagName) {
-						case "panel":
-							var rectAttr = this.getAttribute('rect');
-							var uniqueID = this.getAttribute('uniquid');
-							//createElementUI(uniqueID,rectAttr,'','', this.tagName,'body');
-							$(this).children().each(function(){
-								var rectAttr = this.getAttribute('rect');
-								var uniqueID = this.getAttribute('uniquid');
-								//alert("uniqueID, tagName : "+uniqueID+", "+this.tagName);
-								//createElementUI(uniqueID,rectAttr,'','',this.tagName,'panel');
-							});
-							break;
-						case "button":
-							var rectAttr = this.getAttribute('rect');
-							var uniqueID = this.getAttribute('uniquid');
-							var textVal = this.childNodes[0].nodeValue;
-							//createElementUI(uniqueID,rectAttr,textVal,'',this.tagName,'body');
-							   break;
-						case "image":
-							var rectAttr = this.getAttribute('rect');
-							var uniqueID = this.getAttribute('uniquid');
-							var imgSrc = this.getAttribute('imgSrc');
-							var textVal = this.childNodes[0].nodeValue;
-							//createElementUI(uniqueID,rectAttr,textVal,imgSrc,this.tagName,'body');
-							break;
-						default:
-							break;
-					}
-				});
-			});	
 	});
 });
-
-	function createElement(elementObject){
-		console.log(elementObject.tagName);
+	function drawDiv(elementObject){
+		createElement(elementObject,"");
+		var divElements = elementObject.children;
+		//console.log("elementObject.tagname : "+elementObject.tagName);
+		//console.log("elementObject.children.length : "+elementObject.children.length);
+		for(j=0;j<elementObject.children.length;j++){
+			//console.log("elementObject.tagName : "+elementObject.children[j].tagName);
+			if(elementObject.children[j].tagName == "panel")
+			{
+				//console.log("no child panel");
+				drawDiv(elementObject.children[j]);
+			}
+			else
+			{
+				console.log("panel's children divElements[i].tagName : "+divElements[j].tagName);
+				console.log("elementObject.parentElement.attributes[uniquid].value : "+divElements[j].parentElement.attributes["uniquid"].value );
+				createElement(divElements[j],divElements[j].parentElement.attributes["uniquid"].value);
+			}
+		}
+	}
+	function createElement(elementObject,parentElement){
+		//console.log(elementObject.tagName);
 		switch(elementObject.tagName){
 			case "button":
 				ele = "button";
 				break;
 			case "image":
 				ele = "img";
+				break;
+			case "panel":
+				ele = "div";
 				break;
 		}
 			var uniqueID = elementObject.attributes["uniquid"].value;
@@ -68,6 +58,9 @@ $(document).ready(function()
 			uiElement.setAttribute("id",uniqueID);
 			$(uiElement).css({'left':coordinates[0]+'px','top':coordinates[1]+'px','width':coordinates[2]+'px',"height":coordinates[3]});
 			$(uiElement).text(elementObject.textContent);
-			$("body").append(uiElement);
+			if(parentElement === "")
+				$("body").append(uiElement);
+			else
+				$('#'+elementObject.parentElement.attributes["uniquid"].value).append(uiElement);
 
 	}

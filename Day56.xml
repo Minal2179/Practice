@@ -4,8 +4,9 @@
 		<button rect="0,0,20,20" uniquid="btn1">Button1</button>
 		<label rect="25,0,30,30" uniquid="label1">Welcome</label>
 	</panel>
-	<button rect="0,25,20,20" uniquid="btn2">Button2</button>
-	<image imgSrc="E:/Practice/touch.png" rect="200,200,200,200" uniquid="img1">image1</image>
+	<button rect="0,5,20,20" uniquid="btn2">Button2</button>
+	<image imgSrc="E:/Practice/touch.png" rect="10,20,200,200" uniquid="img1">image1</image>
+	<button rect="0,0,20,20" uniquid="btn2">Button4</button>
 	<panel rect="200,200,200,200" uniquid="div2">
 		<button rect="100,100,20,20" uniquid="btn3">Button3</button>
 	</panel>
