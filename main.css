@@ -32,3 +32,32 @@ width: 10px;
 	width: 200px;
 	background-color: blue;
 }
+
+.ballDiv{
+	position: relative;
+	height: 600px;
+	width: 600px;
+	background-color: cyan;
+}
+.ball{
+	border-radius: 50%;
+	position: absolute;
+	height: 50px;
+	width: 50px;
+	background-color: blue;
+    animation-name: bouncingBall;
+    animation-duration: 10s;
+	transition-timing-function: ease;
+}
+@keyframes bouncingBall{
+	0%{left:0px; top:0px;}
+	11.11% {left:120px; top:550px;}
+    22.22% {left:180px; top:120px;}
+    33.33% {left:240px; top:550px;}
+    44.44% {left:300px; top:240px;}
+	55.5% {left:360px; top:550px;}
+	66.66% {left:420px; top:360px;}
+	77.77% {left:480px; top:550px;}
+	88.88%{left:540px; top:480px;}
+	100%{left:550px; top:550px;}
+}
