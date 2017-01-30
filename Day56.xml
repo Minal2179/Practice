@@ -6,8 +6,8 @@
 <label rect="25,25,30,30" uniquid="label1">Hello</label>
 </panel>
 <panel rect="70,150,100,100" uniquid="div6">
-<button rect="0,0,20,20" uniquid="btn6">Button5</button>
-<label rect="25,0,30,30" uniquid="label4">Hi</label>
+<button rect="0,0,20,20" uniquid="btn4">Button4</button>
+<label rect="25,0,30,30" uniquid="label2">Howareyou</label>
 </panel>
 </panel>
 <button rect="450,350,20,20" uniquid="btn2">Button2</button>

@@ -1,3 +1,4 @@
+var localData = "";
 $(document).ready(function()
 {
 	$.get('Day56.xml', function(result){
@@ -16,18 +17,56 @@ $(document).ready(function()
 		}
 		
 	});
+	
+		$('select').on('change', function() {
+	if(this.value == "hindi"){
+		$.getJSON('Hindi.json',function(result){
+			//localData = JSON.parse(result);
+			//alert(localData);
+			//var localData = jQuery.parseJSON(JSON.stringify(result));
+			//console.log(localData);
+			localData = result;
+			$.each(localData,function(key,value){
+				$('#'+key).text(value);
+			});
+		});
+	}
+	if(this.value == "english"){
+		$.getJSON('English.json',function(result){
+			//localData = JSON.parse(result);
+			//alert(localData);
+			//var localData = jQuery.parseJSON(JSON.stringify(result));
+			//console.log(localData);
+			localData = result;
+			$.each(localData,function(key,value){
+				$('#'+key).text(value);
+			});
+		});
+	}
+	if(this.value == "spanish"){
+		$.getJSON('Spanish.json',function(result){
+		//localData = JSON.parse(result);
+			//alert(localData);	
+			//var localData = jQuery.parseJSON(JSON.stringify(result));
+			//console.log(localData);
+			localData = result;
+			$.each(localData,function(key,value){
+				$('#'+key).text(value);
+			});
+		});
+	}
 });
-//j=-1;
+	
+});
+
+
+
 	function drawDiv(elementObject,parentElement){
 		createElement(elementObject,parentElement);
-		//j++;
 		var j = 0;
 		var divElements = elementObject.children;
-		console.log("started");
 		for(j;j<divElements.length;j++)
 		{
-			console.log("divElements[j].tagName : "+divElements[j].tagName);
-			console.log("j value : "+j);
 			if(divElements[j].tagName == "panel")
 			{
 				drawDiv(elementObject.children[j],divElements[j].parentElement.attributes["uniquid"].value);
@@ -40,7 +79,6 @@ $(document).ready(function()
 	}
 	function createElement(elementObject,parentElement){
 		imgSrc = "";
-		//console.log(elementObject.tagName);
 		switch(elementObject.tagName){
 			case "button":
 				ele = "button";
@@ -65,7 +103,7 @@ $(document).ready(function()
 			}
 			else 
 				uiElement.setAttribute("src",imgSrc);
-			$(uiElement).css({left: coordinates[0]+'px','top': coordinates[1]+'px',width: coordinates[2]+'px',height: coordinates[3],position:"fixed"});
+			$(uiElement).css({left: coordinates[0]+'px','top': coordinates[1]+'px',width: coordinates[2]+'px',height: coordinates[3],position:"absolute"});
 			if(elementObject.tagName == "panel"){
 			}
 			else
