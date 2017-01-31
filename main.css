@@ -71,8 +71,8 @@ width: 10px;
 @keyframes bouncingBallTop{
 	0%{top:0px;animation-timing-function: ease-in;}
 	20%{top:550px;animation-timing-function:ease-out;}
-	40% {top:0px;animation-timing-function: ease-in;}
+	40% {top:200px;animation-timing-function: ease-in;}
 	60%{top:550px;animation-timing-function:ease-out;}
-	80% {top:0px;animation-timing-function: ease-in;}
+	80% {top:400px;animation-timing-function: ease-in;}
 	100%{top:550px;}
 }
