@@ -48,6 +48,8 @@ width: 10px;
   /*  animation: bouncingBall;*/
 	animation: bouncingBallLeft,bouncingBallTop;
     animation-duration: 5s;
+	animation-iteration-count: 3;
+    animation-direction: alternate;
 }
 /*@keyframes bouncingBall{
 	0%{left:0px; top:0px;}
@@ -63,15 +65,14 @@ width: 10px;
 }*/
 @keyframes bouncingBallLeft{
 	0%{left:0px;animation-timing-function: linear;}
-	100%{left:150px;}
-}
-@keyframes bouncingBallLeft2{
-	0%{left:150px;animation-timing-function: linear;}
-	100%{left:300px;}
+	100%{left:550px;}
 }
 
 @keyframes bouncingBallTop{
 	0%{top:550px;animation-timing-function: ease-out;}
-	50% {top:0px;animation-timing-function: ease-in;}
-	100%{top:550px;}
+	20%{top:0px;animation-timing-function:ease-in;}
+	40% {top:550px;animation-timing-function: ease-out;}
+	60%{top:0px;animation-timing-function:ease-in;}
+	80% {top:550px;animation-timing-function: ease-out;}
+	100%{top:0px;}
 }
