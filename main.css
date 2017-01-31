@@ -45,11 +45,11 @@ width: 10px;
 	height: 50px;
 	width: 50px;
 	background-color: blue;
+	top:0px;
   /*  animation: bouncingBall;*/
 	animation: bouncingBallLeft,bouncingBallTop;
     animation-duration: 5s;
-	animation-iteration-count: 3;
-    animation-direction: alternate;
+
 }
 /*@keyframes bouncingBall{
 	0%{left:0px; top:0px;}
@@ -69,10 +69,10 @@ width: 10px;
 }
 
 @keyframes bouncingBallTop{
-	0%{top:550px;animation-timing-function: ease-out;}
-	20%{top:0px;animation-timing-function:ease-in;}
-	40% {top:550px;animation-timing-function: ease-out;}
-	60%{top:0px;animation-timing-function:ease-in;}
-	80% {top:550px;animation-timing-function: ease-out;}
-	100%{top:0px;}
+	0%{top:0px;animation-timing-function: ease-in;}
+	20%{top:550px;animation-timing-function:ease-out;}
+	40% {top:0px;animation-timing-function: ease-in;}
+	60%{top:550px;animation-timing-function:ease-out;}
+	80% {top:0px;animation-timing-function: ease-in;}
+	100%{top:550px;}
 }
