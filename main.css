@@ -45,11 +45,11 @@ width: 10px;
 	height: 50px;
 	width: 50px;
 	background-color: blue;
-    animation-name: bouncingBall;
+  /*  animation: bouncingBall;*/
+	animation: bouncingBallLeft,bouncingBallTop;
     animation-duration: 10s;
-	transition-timing-function: ease;
 }
-@keyframes bouncingBall{
+/*@keyframes bouncingBall{
 	0%{left:0px; top:0px;}
 	11.11% {left:120px; top:550px;}
     22.22% {left:180px; top:120px;}
@@ -60,4 +60,13 @@ width: 10px;
 	77.77% {left:480px; top:550px;}
 	88.88%{left:540px; top:480px;}
 	100%{left:550px; top:550px;}
+}*/
+@keyframes bouncingBallLeft{
+	from{left:0px;}
+	to{left:550px;}
+}
+@keyframes bouncingBallTop{
+	0%{top:550px;transition-timing-function: ease-out;}
+	50% {top:0px;transition-timing-function: ease-in;}
+	100%{top:550px;}
 }
