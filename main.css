@@ -47,7 +47,7 @@ width: 10px;
 	background-color: blue;
   /*  animation: bouncingBall;*/
 	animation: bouncingBallLeft,bouncingBallTop;
-    animation-duration: 10s;
+    animation-duration: 5s;
 }
 /*@keyframes bouncingBall{
 	0%{left:0px; top:0px;}
@@ -62,11 +62,16 @@ width: 10px;
 	100%{left:550px; top:550px;}
 }*/
 @keyframes bouncingBallLeft{
-	from{left:0px;}
-	to{left:550px;}
+	0%{left:0px;animation-timing-function: linear;}
+	100%{left:150px;}
 }
+@keyframes bouncingBallLeft2{
+	0%{left:150px;animation-timing-function: linear;}
+	100%{left:300px;}
+}
+
 @keyframes bouncingBallTop{
-	0%{top:550px;transition-timing-function: ease-out;}
-	50% {top:0px;transition-timing-function: ease-in;}
+	0%{top:550px;animation-timing-function: ease-out;}
+	50% {top:0px;animation-timing-function: ease-in;}
 	100%{top:550px;}
 }
