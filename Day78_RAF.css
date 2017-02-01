@@ -1,0 +1,23 @@
+.ballDiv{
+	position: relative;
+	height: 600px;
+	width: 600px;
+	background-color: cyan;
+}
+.ball{
+	border-radius: 50%;
+	position: absolute;
+	height: 50px;
+	width: 50px;
+	background-color: blue;
+	transition: 3s;
+	left:0px;
+	top:0px;
+}
+.ball.drop{
+	top:550px;
+
+}
+.ball.rise{
+	top:0px;
+}
