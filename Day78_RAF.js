@@ -6,15 +6,12 @@ function bouncingBall() {
 	for (i;i<3;i++){
 		if (drop == 1)
 		{
-			//$(".ball").css({top:'550px'});
-			$(".ball").removeClass('rise');
-			$(".ball").addClass('drop');
+			$(".ball").css({top:'550px'});
 			drop = 0;
 		}
 		else
 		{
-			$(".ball").removeClass('drop');
-			$(".ball").addClass('rise');
+			$(".ball").css({top:'0px'});
 			drop = 1;
 		}
 	}
