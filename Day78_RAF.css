@@ -10,14 +10,7 @@
 	height: 50px;
 	width: 50px;
 	background-color: blue;
-	transition: 3s;
+	/*transition: 3s;*/
 	left:0px;
-	top:0px;
-}
-.ball.drop{
-	top:550px;
-
-}
-.ball.rise{
 	top:0px;
 }
