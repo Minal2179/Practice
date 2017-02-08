@@ -1,13 +1,14 @@
 
-var i=0,j=0;
+var i=0,j=0,a=0;
 function bouncingBall() {
-	if (j<560){
-			j++;
+	if (parseInt(j)<560 && parseInt(i)<150){
+			//i++;
 			//i = j*j/(4*(-5))
-			//j = $('.ball').offset().left;
-			$(".ball").offset({left	:(Math.sqrt(j*j/(4*(5)))),top:j});
+			//j = Math.sqrt(4*i);
+			//$(".ball").offset({left	:(Math.sqrt(j*j/(4*(5)))),top:j});
+			//$(".ball").offset({left	:i,top:(Math.sqrt(4*i))});
 			//$(".ball").offset({left:i,top:j});
-	}
+	//}
 	//if(i>=150 & i<300 & j>0){
 			
 		//	j--;
@@ -18,7 +19,21 @@ function bouncingBall() {
 	//$(".ball").offset({left:i++});
 	
 	//$(".ball").offset({top:j++});
-	requestAnimationFrame(bouncingBall);
+	
+	a = 10;
+	j++;
+	console.log('j : '+j);
+	console.log('i : '+i);
+	i = Math.sqrt(4*10*j);
+	$(".ball").offset({left	:i,top:j});
 }
-
+if(j >= 560)
+{
+	console.log('here');
+	j--;
+	i = 150.00 + Math.sqrt(4*10*j);
+	$(".ball").offset({left	:i,top:j});
+}
+requestAnimationFrame(bouncingBall);
+}
 requestAnimationFrame(bouncingBall);
